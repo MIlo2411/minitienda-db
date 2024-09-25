@@ -147,3 +147,55 @@ END //
 DELIMITER ;
 
 -- usuarios
+-- Insertar
+
+DELIMITER //
+CREATE PROCEDURE procInsertUsuario(
+    IN v_correo VARCHAR(80),
+    IN v_contrasena TEXT,
+    IN v_salt TEXT,
+    IN v_estado VARCHAR(15)
+)
+BEGIN
+    INSERT INTO tbl_usuarios (usu_correo, uso_contrasena, usu_salt, usu_estado)
+    VALUES (v_correo, v_contrasena, v_salt, v_estado);
+END //
+DELIMITER ;
+
+-- Mostrar
+
+DELIMITER //
+CREATE PROCEDURE procGetUsuarioById(IN v_id INT)
+BEGIN
+    SELECT * FROM tbl_usuarios WHERE usu_id = v_id;
+END //
+DELIMITER ;
+
+-- Actualizar
+
+DELIMITER //
+CREATE PROCEDURE procUpdateUsuario(
+    IN v_id INT,
+    IN v_correo VARCHAR(80),
+    IN v_contrasena TEXT,
+    IN v_salt TEXT,
+    IN v_estado VARCHAR(15)
+)
+BEGIN
+    UPDATE tbl_usuarios
+    SET usu_correo = v_correo,
+        uso_contrasena = v_contrasena,
+        usu_salt = v_salt,
+        usu_estado = v_estado
+    WHERE usu_id = v_id;
+END //
+DELIMITER ;
+
+-- Eliminar
+
+DELIMITER //
+CREATE PROCEDURE procDeleteUsuario(IN v_id INT)
+BEGIN
+    DELETE FROM tbl_usuarios WHERE usu_id = v_id;
+END //
+DELIMITER ;
